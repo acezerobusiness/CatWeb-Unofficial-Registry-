@@ -1,4 +1,4 @@
-q<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,301 +7,269 @@ q<!DOCTYPE html>
 
 <style>
 :root {
-    --bg: #0a0c10;
-    --card: rgba(22, 26, 34, 0.7);
-    --border: rgba(255,255,255,0.06);
-    --accent: #4ade80;
-    --text: #e8ecf1;
-    --muted: #8a93a8;
+    --bg:#0b0d12;
+    --card:#151922;
+    --text:#e6eaf2;
+    --muted:#8b93a7;
+    --accent:#4ade80;
 }
 
-/* GLOBAL */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+.light {
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#111;
+    --muted:#666;
 }
 
-body {
-    background: radial-gradient(circle at top, #11151d, #080a0f);
-    color: var(--text);
-    height: 100vh;
-    display: flex;
-    overflow: hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui;}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    height:100vh;
+    transition:0.3s;
 }
 
-/* APP LAYOUT */
-.app {
-    display: flex;
-    width: 100%;
+/* Sidebar */
+.sidebar{
+    width:240px;
+    background:var(--card);
+    border-right:1px solid #222;
+    padding:20px;
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 240px;
-    padding: 24px;
-    background: rgba(10,12,18,0.6);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid var(--border);
+.logo{color:var(--accent);margin-bottom:20px;font-weight:600;}
+
+button{
+    width:100%;
+    padding:10px;
+    margin-bottom:8px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:transparent;
+    color:var(--text);
+    transition:0.2s;
 }
 
-.logo {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 30px;
-    letter-spacing: 0.5px;
+button:hover{background:#222;}
+
+.main{
+    flex:1;
+    padding:40px;
+    display:flex;
+    justify-content:center;
 }
 
-.nav button {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(.4,0,.2,1);
+/* Card */
+.card{
+    width:100%;
+    max-width:600px;
+    background:var(--card);
+    padding:25px;
+    border-radius:10px;
+    animation:fade 0.4s ease;
 }
 
-.nav button:hover {
-    background: rgba(255,255,255,0.05);
-    transform: translateX(6px);
+/* Input */
+input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:6px;
+    border:1px solid #333;
+    background:transparent;
+    color:var(--text);
 }
 
-.nav button:active {
-    transform: scale(0.96);
+/* Button main */
+.btn{
+    margin-top:15px;
+    background:var(--accent);
+    color:black;
+    font-weight:bold;
 }
 
-/* MAIN */
-.main {
-    flex: 1;
-    padding: 50px;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
+/* Trademark */
+.tm{
+    border:1px solid #333;
+    padding:12px;
+    margin-top:10px;
+    border-radius:8px;
+    display:flex;
+    justify-content:space-between;
 }
 
-/* CARD */
-.card {
-    width: 100%;
-    max-width: 520px;
-    padding: 28px;
-    border-radius: 14px;
-    background: var(--card);
-    backdrop-filter: blur(25px);
-    border: 1px solid var(--border);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-    animation: smoothIn 0.5s cubic-bezier(.4,0,.2,1);
-}
-
-/* INPUT */
-input {
-    width: 100%;
-    padding: 13px;
-    margin-top: 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: rgba(0,0,0,0.3);
-    color: white;
-    transition: 0.25s;
-}
-
-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(74,222,128,0.15);
-}
-
-/* BUTTON */
-.btn {
-    margin-top: 16px;
-    padding: 13px;
-    width: 100%;
-    border-radius: 8px;
-    border: none;
-    background: var(--accent);
-    color: black;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(.4,0,.2,1);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(74,222,128,0.25);
-}
-
-.btn:active {
-    transform: scale(0.97);
-}
-
-/* TRADEMARK ITEM */
-.tm {
-    padding: 14px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    background: rgba(255,255,255,0.02);
-    transition: 0.25s;
-}
-
-.tm:hover {
-    transform: translateY(-2px);
-    background: rgba(255,255,255,0.05);
-}
-
-/* TEXT */
-.sub {
-    color: var(--muted);
-    margin-top: 5px;
-    font-size: 14px;
-}
-
-/* ANIMATION */
-@keyframes smoothIn {
-    from {opacity:0; transform:translateY(15px) scale(0.98);}
-    to {opacity:1; transform:translateY(0) scale(1);}
+/* Animations */
+@keyframes fade{
+from{opacity:0;transform:translateY(10px)}
+to{opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="sidebar">
+<div class="logo">CatWeb Registry</div>
 
-    <div class="sidebar">
-        <div class="logo">CatWeb™ Registry</div>
-        <div class="nav">
-            <button onclick="go('dashboard')">Dashboard</button>
-            <button onclick="go('register')">Register</button>
-        </div>
-    </div>
+<button onclick="nav('dashboard')">Dashboard</button>
+<button onclick="nav('register')">Register</button>
+<button onclick="nav('manage')">Manage</button>
+<button onclick="nav('settings')">Settings</button>
+<button onclick="nav('legal')">Legal</button>
+</div>
 
-    <div class="main">
-        <div id="view"></div>
-    </div>
-
+<div class="main">
+<div id="view"></div>
 </div>
 
 <script>
-let user = localStorage.getItem("cw_user");
+let user=localStorage.getItem("cw_user");
+let theme=localStorage.getItem("cw_theme")||"dark";
 
-/* STORAGE */
+if(theme==="light") document.body.classList.add("light");
+
 function db(){return JSON.parse(localStorage.getItem("cw_data"))||[];}
 function save(d){localStorage.setItem("cw_data",JSON.stringify(d));}
 
-/* NAVIGATION */
-function go(page){
-    if(!user) return loginPage();
+/* NAV */
+function nav(p){
+if(!user)return login();
 
-    if(page==="register"){
-        view.innerHTML=`
-        <div class="card">
-            <h2>Register Trademark</h2>
-            <div class="sub">Secure your identity</div>
+if(p==="dashboard"){
+let data=db().filter(x=>x.owner===user);
 
-            <input id="name" placeholder="Trademark name">
-            <button class="btn" onclick="register()">Register</button>
+view.innerHTML=`
+<div class="card">
+<h2>Dashboard</h2>
+<p>@${user}</p>
 
-            <div id="msg" class="sub"></div>
-        </div>`;
-    }
+${data.map(t=>`<div class="tm">${t.name}<span>™</span></div>`).join("")||"No trademarks"}
 
-    if(page==="dashboard"){
-        let data=db().filter(x=>x.owner===user);
-
-        view.innerHTML=`
-        <div class="card">
-            <h2>Dashboard</h2>
-            <div class="sub">@${user}</div>
-
-            <input placeholder="Search..." oninput="search(this.value)">
-
-            <div id="list">
-            ${render(data)}
-            </div>
-
-            <button class="btn" style="background:#ef4444;color:white;margin-top:20px" onclick="logout()">Logout</button>
-        </div>`;
-    }
-}
-
-/* RENDER */
-function render(data){
-    if(!data.length) return `<div class="sub">No trademarks</div>`;
-    return data.map(t=>`
-        <div class="tm">
-            <strong>${t.name}</strong>
-            <span style="color:var(--accent)">${t.name}™</span>
-        </div>
-    `).join("");
-}
-
-/* LOGIN */
-function loginPage(){
-    view.innerHTML=`
-    <div class="card">
-        <h2>Welcome</h2>
-        <div class="sub">Create your identity</div>
-
-        <input id="u" placeholder="Username">
-        <button class="btn" onclick="login()">Continue</button>
-
-        <div class="sub" style="margin-top:10px">
-        Unoffical legal trademark system for CatWeb.
-        </div>
-    </div>`;
-}
-
-function login(){
-    let u=document.getElementById("u").value.trim();
-    if(!u)return;
-    localStorage.setItem("cw_user",u);
-    user=u;
-    go("dashboard");
-}
-
-function logout(){
-    localStorage.removeItem("cw_user");
-    user=null;
-    loginPage();
+</div>`;
 }
 
 /* REGISTER */
-function register(){
-    let name=document.getElementById("name").value.trim();
-    let msg=document.getElementById("msg");
+if(p==="register"){
+view.innerHTML=`
+<div class="card">
+<h2>Register</h2>
 
-    if(!name)return msg.textContent="Enter a name";
+<input id="name" placeholder="Trademark name">
+<button class="btn" onclick="reg()">Register</button>
 
-    let data=db();
-
-    if(data.find(t=>t.name.toLowerCase()===name.toLowerCase())){
-        msg.textContent="Already taken";
-        return;
-    }
-
-    data.push({name,owner:user});
-    save(data);
-
-    msg.style.color="#4ade80";
-    msg.textContent="Registered successfully";
+<p id="msg"></p>
+</div>`;
 }
 
-/* SEARCH */
-function search(q){
-    let data=db().filter(x=>x.owner===user);
-    let filtered=data.filter(t=>t.name.toLowerCase().includes(q.toLowerCase()));
-    document.getElementById("list").innerHTML=render(filtered);
+/* MANAGE */
+if(p==="manage"){
+let data=db().filter(x=>x.owner===user);
+
+view.innerHTML=`
+<div class="card">
+<h2>Manage</h2>
+
+${data.map((t,i)=>`
+<div class="tm">
+${t.name}
+<button onclick="del(${i})">Delete</button>
+</div>`).join("")||"None"}
+
+</div>`;
+}
+
+/* SETTINGS */
+if(p==="settings"){
+view.innerHTML=`
+<div class="card">
+<h2>Settings</h2>
+
+<button onclick="toggleTheme()">Toggle Theme</button>
+<button onclick="logout()">Logout</button>
+
+</div>`;
+}
+
+/* LEGAL */
+if(p==="legal"){
+view.innerHTML=`
+<div class="card">
+<h2>Legal</h2>
+
+<h3>Terms</h3>
+<p>Trademarks for this site only apply to the CatWeb web browser and are not legally binding.</p>
+
+<h3>Privacy Policy</h3>
+<p>All data is stored locally in your browser. No external servers collect or store your data.</p>
+
+</div>`;
+}
+}
+
+/* AUTH */
+function login(){
+view.innerHTML=`
+<div class="card">
+<h2>Login</h2>
+
+<input id="u" placeholder="Username">
+<button class="btn" onclick="doLogin()">Continue</button>
+
+</div>`;
+}
+
+function doLogin(){
+let u=document.getElementById("u").value.trim();
+if(!u)return;
+localStorage.setItem("cw_user",u);
+user=u;
+nav("dashboard");
+}
+
+function logout(){
+localStorage.removeItem("cw_user");
+user=null;
+login();
+}
+
+/* REGISTER */
+function reg(){
+let name=document.getElementById("name").value.trim();
+let msg=document.getElementById("msg");
+
+let data=db();
+
+if(data.find(t=>t.name.toLowerCase()===name.toLowerCase())){
+msg.textContent="Taken";
+return;
+}
+
+data.push({name,owner:user});
+save(data);
+
+msg.textContent="Registered";
+}
+
+/* DELETE */
+function del(i){
+let data=db();
+data.splice(i,1);
+save(data);
+nav("manage");
+}
+
+/* THEME */
+function toggleTheme(){
+document.body.classList.toggle("light");
+localStorage.setItem("cw_theme",
+document.body.classList.contains("light")?"light":"dark");
 }
 
 /* INIT */
-user?go("dashboard"):loginPage();
+user?nav("dashboard"):login();
 </script>
 
 </body>
