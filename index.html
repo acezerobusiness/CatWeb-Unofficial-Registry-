@@ -6,104 +6,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root {
-    --bg:#0b0d12;
-    --card:#151922;
-    --text:#e6eaf2;
-    --muted:#8b93a7;
-    --accent:#4ade80;
+:root{
+--bg:#0b0f17;
+--card:rgba(20,24,32,0.6);
+--border:rgba(255,255,255,0.08);
+--text:#e8ecf1;
+--muted:#8b93a7;
+--accent:#4ade80;
 }
 
-.light {
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --text:#111;
-    --muted:#666;
+.light{
+--bg:#f4f6fb;
+--card:rgba(255,255,255,0.7);
+--text:#111;
+--muted:#555;
+--border:rgba(0,0,0,0.08);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Inter,sans-serif;}
 
 body{
-    background:var(--bg);
-    color:var(--text);
-    display:flex;
-    height:100vh;
-    transition:0.3s;
+background:radial-gradient(circle at top,#111827,var(--bg));
+color:var(--text);
+height:100vh;
+display:flex;
+overflow:hidden;
+transition:0.4s;
 }
 
-/* Sidebar */
+/* LAYOUT */
+.app{display:flex;width:100%;}
+
+/* SIDEBAR */
 .sidebar{
-    width:240px;
-    background:var(--card);
-    border-right:1px solid #222;
-    padding:20px;
+width:260px;
+padding:24px;
+background:var(--card);
+backdrop-filter:blur(25px);
+border-right:1px solid var(--border);
 }
 
-.logo{color:var(--accent);margin-bottom:20px;font-weight:600;}
-
-button{
-    width:100%;
-    padding:10px;
-    margin-bottom:8px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    background:transparent;
-    color:var(--text);
-    transition:0.2s;
+.logo{
+font-weight:700;
+font-size:18px;
+color:var(--accent);
+margin-bottom:30px;
 }
 
-button:hover{background:#222;}
+.nav button{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border-radius:10px;
+border:1px solid var(--border);
+background:transparent;
+color:var(--text);
+cursor:pointer;
+transition:all .25s cubic-bezier(.4,0,.2,1);
+}
 
+.nav button:hover{
+background:rgba(255,255,255,0.05);
+transform:translateX(6px);
+}
+
+.nav button:active{transform:scale(.96);}
+
+/* MAIN */
 .main{
-    flex:1;
-    padding:40px;
-    display:flex;
-    justify-content:center;
+flex:1;
+padding:50px;
+display:flex;
+justify-content:center;
+overflow-y:auto;
 }
 
-/* Card */
+/* CARD */
 .card{
-    width:100%;
-    max-width:600px;
-    background:var(--card);
-    padding:25px;
-    border-radius:10px;
-    animation:fade 0.4s ease;
+width:100%;
+max-width:640px;
+padding:30px;
+border-radius:18px;
+background:var(--card);
+backdrop-filter:blur(30px);
+border:1px solid var(--border);
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+animation:fade .5s cubic-bezier(.4,0,.2,1);
 }
 
-/* Input */
+/* TEXT */
+.sub{color:var(--muted);margin-top:5px;font-size:14px;}
+
+/* INPUT */
 input{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:6px;
-    border:1px solid #333;
-    background:transparent;
-    color:var(--text);
+width:100%;
+padding:14px;
+margin-top:12px;
+border-radius:10px;
+border:1px solid var(--border);
+background:rgba(0,0,0,0.3);
+color:var(--text);
+transition:.25s;
 }
 
-/* Button main */
+input:focus{
+outline:none;
+border-color:var(--accent);
+box-shadow:0 0 0 3px rgba(74,222,128,.15);
+}
+
+/* BUTTON */
 .btn{
-    margin-top:15px;
-    background:var(--accent);
-    color:black;
-    font-weight:bold;
+margin-top:16px;
+padding:14px;
+width:100%;
+border-radius:10px;
+border:none;
+background:var(--accent);
+color:black;
+font-weight:600;
+cursor:pointer;
+transition:.25s;
 }
 
-/* Trademark */
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 30px rgba(74,222,128,.25);
+}
+
+.btn:active{transform:scale(.97);}
+
+/* TRADEMARK */
 .tm{
-    border:1px solid #333;
-    padding:12px;
-    margin-top:10px;
-    border-radius:8px;
-    display:flex;
-    justify-content:space-between;
+margin-top:12px;
+padding:16px;
+border-radius:12px;
+border:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(255,255,255,0.03);
+transition:.25s;
 }
 
-/* Animations */
+.tm:hover{
+transform:translateY(-2px);
+background:rgba(255,255,255,0.06);
+}
+
+/* TAG */
+.tag{
+font-size:12px;
+color:var(--accent);
+}
+
+/* ANIM */
 @keyframes fade{
-from{opacity:0;transform:translateY(10px)}
+from{opacity:0;transform:translateY(15px) scale(.98);}
 to{opacity:1;}
 }
 </style>
@@ -111,31 +170,37 @@ to{opacity:1;}
 
 <body>
 
-<div class="sidebar">
-<div class="logo">CatWeb Registry</div>
+<div class="app">
 
-<button onclick="nav('dashboard')">Dashboard</button>
-<button onclick="nav('register')">Register</button>
-<button onclick="nav('manage')">Manage</button>
-<button onclick="nav('settings')">Settings</button>
-<button onclick="nav('legal')">Legal</button>
+<div class="sidebar">
+<div class="logo">CatWeb™ Registry</div>
+
+<div class="nav">
+<button onclick="go('dashboard')">Dashboard</button>
+<button onclick="go('register')">Register</button>
+<button onclick="go('manage')">Manage</button>
+<button onclick="go('settings')">Settings</button>
+<button onclick="go('legal')">Legal</button>
+</div>
 </div>
 
 <div class="main">
 <div id="view"></div>
 </div>
 
+</div>
+
 <script>
 let user=localStorage.getItem("cw_user");
 let theme=localStorage.getItem("cw_theme")||"dark";
+if(theme==="light")document.body.classList.add("light");
 
-if(theme==="light") document.body.classList.add("light");
-
+/* DB */
 function db(){return JSON.parse(localStorage.getItem("cw_data"))||[];}
 function save(d){localStorage.setItem("cw_data",JSON.stringify(d));}
 
 /* NAV */
-function nav(p){
+function go(p){
 if(!user)return login();
 
 if(p==="dashboard"){
@@ -144,10 +209,9 @@ let data=db().filter(x=>x.owner===user);
 view.innerHTML=`
 <div class="card">
 <h2>Dashboard</h2>
-<p>@${user}</p>
+<div class="sub">@${user}</div>
 
-${data.map(t=>`<div class="tm">${t.name}<span>™</span></div>`).join("")||"No trademarks"}
-
+${data.length?data.map(t=>tmUI(t)).join(""):`<div class="sub">No trademarks yet</div>`}
 </div>`;
 }
 
@@ -155,12 +219,13 @@ ${data.map(t=>`<div class="tm">${t.name}<span>™</span></div>`).join("")||"No t
 if(p==="register"){
 view.innerHTML=`
 <div class="card">
-<h2>Register</h2>
+<h2>Register Trademark</h2>
+<div class="sub">Secure your identity</div>
 
 <input id="name" placeholder="Trademark name">
-<button class="btn" onclick="reg()">Register</button>
+<button class="btn" onclick="register()">Register</button>
 
-<p id="msg"></p>
+<div id="msg" class="sub"></div>
 </div>`;
 }
 
@@ -174,10 +239,12 @@ view.innerHTML=`
 
 ${data.map((t,i)=>`
 <div class="tm">
-${t.name}
+<div>
+<strong>${t.name}</strong>
+<div class="sub">${t.id}</div>
+</div>
 <button onclick="del(${i})">Delete</button>
 </div>`).join("")||"None"}
-
 </div>`;
 }
 
@@ -187,9 +254,8 @@ view.innerHTML=`
 <div class="card">
 <h2>Settings</h2>
 
-<button onclick="toggleTheme()">Toggle Theme</button>
-<button onclick="logout()">Logout</button>
-
+<button class="btn" onclick="toggleTheme()">Toggle Theme</button>
+<button class="btn" style="background:#ef4444;color:white" onclick="logout()">Logout</button>
 </div>`;
 }
 
@@ -200,24 +266,39 @@ view.innerHTML=`
 <h2>Legal</h2>
 
 <h3>Terms</h3>
-<p>Trademarks for this site only apply to the CatWeb web browser and are not legally binding.</p>
+<p class="sub">
+Trademarks for this site only apply to the CatWeb web browser and are not legally binding in any jurisdiction.
+</p>
 
-<h3>Privacy Policy</h3>
-<p>All data is stored locally in your browser. No external servers collect or store your data.</p>
-
+<h3 style="margin-top:15px">Privacy Policy</h3>
+<p class="sub">
+All data is stored locally within your browser. No personal data is transmitted, stored externally, or shared.
+</p>
 </div>`;
 }
 }
 
-/* AUTH */
+/* UI */
+function tmUI(t){
+return `
+<div class="tm">
+<div>
+<strong>${t.name}</strong>
+<div class="sub">${t.date}</div>
+</div>
+<div class="tag">CW™</div>
+</div>`;
+}
+
+/* LOGIN */
 function login(){
 view.innerHTML=`
 <div class="card">
-<h2>Login</h2>
+<h2>Welcome</h2>
+<div class="sub">Create your identity</div>
 
 <input id="u" placeholder="Username">
 <button class="btn" onclick="doLogin()">Continue</button>
-
 </div>`;
 }
 
@@ -226,9 +307,10 @@ let u=document.getElementById("u").value.trim();
 if(!u)return;
 localStorage.setItem("cw_user",u);
 user=u;
-nav("dashboard");
+go("dashboard");
 }
 
+/* LOGOUT */
 function logout(){
 localStorage.removeItem("cw_user");
 user=null;
@@ -236,21 +318,30 @@ login();
 }
 
 /* REGISTER */
-function reg(){
+function register(){
 let name=document.getElementById("name").value.trim();
 let msg=document.getElementById("msg");
+
+if(!name)return msg.textContent="Enter name";
 
 let data=db();
 
 if(data.find(t=>t.name.toLowerCase()===name.toLowerCase())){
-msg.textContent="Taken";
+msg.textContent="Already taken";
 return;
 }
 
-data.push({name,owner:user});
+data.push({
+name,
+owner:user,
+id:"CW-"+Math.random().toString(36).slice(2,8).toUpperCase(),
+date:new Date().toLocaleString()
+});
+
 save(data);
 
-msg.textContent="Registered";
+msg.style.color="var(--accent)";
+msg.textContent="Registered successfully";
 }
 
 /* DELETE */
@@ -258,7 +349,7 @@ function del(i){
 let data=db();
 data.splice(i,1);
 save(data);
-nav("manage");
+go("manage");
 }
 
 /* THEME */
@@ -269,7 +360,7 @@ document.body.classList.contains("light")?"light":"dark");
 }
 
 /* INIT */
-user?nav("dashboard"):login();
+user?go("dashboard"):login();
 </script>
 
 </body>
